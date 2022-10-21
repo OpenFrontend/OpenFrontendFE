@@ -1,8 +1,10 @@
+import Navbar from "./Modules/Navbar";
+
 function App() {
   return (
-    <div className="text-3xl font-bold underline">
-      Hello World!
-    </div>
+    <div className='bg-gray-100 h-screen'>
+    <Navbar></Navbar>
+  </div>
   );
 }
 

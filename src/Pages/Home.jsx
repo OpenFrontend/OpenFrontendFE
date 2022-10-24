@@ -1,6 +1,9 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { calculateNewValue } from "@testing-library/user-event/dist/utils";
 import React, { useState } from "react";
 import Cards from "../Modules/Cards/Cards";
+import HomeNavbar from "../Modules/HomeNavbar/HomeNavbar";
+import Modal from "../Modules/Modal/Modal";
 import Search from "../Modules/Search/Search";
 import SideBar from "../Modules/SideBar/SideBar";
 
@@ -11,28 +14,19 @@ const Home = () => {
     setSideBar(!sideBar);
   };
   return (
-    <div className="bg-white m-1">
-      <div className="flex  px-5 py-3 items-center justify-between">
-        <div className="w-1/4">
-          <button onClick={toggleSideBar}>
-            Components{" "}
-            <ChevronRightIcon
-              onClick={toggleSideBar}
-              className="h-5 w-5 inline-block cursor-pointer"
-              aria-hidden="true"
-            />
-          </button>
-        </div>
-        <div className="w-2/4">
-          <Search />
-        </div>
-        <div className="w-1/4"></div>
+    <div className="bg-gray-200 m-1">
+      <div className="sticky w-full z-10 bg-white top-0">
+        <HomeNavbar toggleSideBar={toggleSideBar} />
+
+        {sideBar && <SideBar toggleSideBar={toggleSideBar} />}
       </div>
-      {sideBar && <SideBar toggleSideBar={toggleSideBar} />}
       <div className="text-center font-bold text-2xl py-5">
         <h3>Check out some of today’s popular shots</h3>
       </div>
-      <div className="lg:px-20 py-5">
+      <div
+        className={`lg:px-20 py-5 `}
+        style={{ marginLeft: `${sideBar ? "20%" : "0"}` }}
+      >
         <Cards />
       </div>
     </div>

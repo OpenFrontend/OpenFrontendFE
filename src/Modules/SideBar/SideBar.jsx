@@ -11,7 +11,7 @@ const SideBar = (props) => {
     return classes.filter(Boolean).join(" ");
   }
   return (
-    <div className="absolute  border-r-2 lg:w-1/4 w-3/4 bg-white h-full z-10">
+    <div className="absolute border-r-2 lg:w-1/5 w-3/4 bg-white h-screen z-10">
       <div className="flex justify-end  m-2 text-black">
         <XMarkIcon
           onClick={toggleSideBar}
@@ -22,11 +22,7 @@ const SideBar = (props) => {
       <div className="flex flex-col items-center">
         <div className="flex border w-2/4 my-2 px-10 py-3 rounded-full hover:bg-gray-300 hover:text-white">
           <BellIcon className="h-6 w-6 mx-1" aria-hidden="true" />
-          <a>Navbar</a>
-        </div>
-        <div className="flex border w-2/4 my-2 px-10 py-3 rounded-full hover:bg-gray-300 hover:text-white">
-          <BellIcon className="h-6 w-6 mx-1" aria-hidden="true" />
-          <a>Sidebar</a>
+          <a>search</a>
         </div>
         <div className="flex border w-2/4 my-2 px-10 py-3 rounded-full hover:bg-gray-300 hover:text-white">
           <BellIcon className="h-6 w-6 mx-1" aria-hidden="true" />
@@ -34,7 +30,11 @@ const SideBar = (props) => {
         </div>
         <div className="flex border w-2/4 my-2 px-10 py-3 rounded-full hover:bg-gray-300 hover:text-white">
           <BellIcon className="h-6 w-6 mx-1" aria-hidden="true" />
-          <a>modals</a>
+          <a>search</a>
+        </div>
+        <div className="flex border w-2/4 my-2 px-10 py-3 rounded-full hover:bg-gray-300 hover:text-white">
+          <BellIcon className="h-6 w-6 mx-1" aria-hidden="true" />
+          <a>search</a>
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/24/outline";
 import SideBar from "../SideBar/SideBar";
 import { Link } from "react-router-dom";
+import Login from "../Login/Login";
 
 const navigation = [
   // { name: 'Dashboard', href: '#', current: false },
@@ -66,16 +67,15 @@ export default function Navbar() {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <button
+                  {/* <button
                     type="button"
                     className="rounded-full bg-white-800 p-1 text-gray-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 "
                   >
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  </button> */}
 
-                  {/* Profile dropdown */}
-                  <Menu as="div" className="relative ml-3">
+                  {/* <Menu as="div" className="relative ml-3 z-40">
                     <div>
                       <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 ">
                         <span className="sr-only">Open user menu</span>
@@ -172,7 +172,13 @@ export default function Navbar() {
                         </Menu.Item>
                       </Menu.Items>
                     </Transition>
-                  </Menu>
+                  </Menu> */}
+                  <button
+                    type="button"
+                    className="mx-2 rounded-md bg-gray-600 px-3 py-2 text-gray-100 font-bold hover:text-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 "
+                  >
+                    <Login />
+                  </button>
                   <button
                     type="button"
                     className="mx-2 rounded-md bg-gray-600 px-3 py-2 text-gray-100 font-bold hover:text-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 "

@@ -3,12 +3,16 @@ import Card from "../Card/Card";
 
 const Cards = () => {
   return (
-    <div className="grid lg:grid-cols-4 gap-10">
+    <div className=" grid lg:grid-cols-4 gap-10">
       <Card />
       <Card />
       <Card />
       <Card />
       <Card />
+     
+      <Card />
+      <Card />
+      
       <Card />
       <Card />
       <Card />

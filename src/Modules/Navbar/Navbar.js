@@ -1,18 +1,6 @@
-import { Fragment, useState } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import {
-  ArrowLeftCircleIcon,
-  Bars3Icon,
-  BellIcon,
-  BookOpenIcon,
-  DocumentIcon,
-  TagIcon,
-  UserCircleIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import SideBar from "../SideBar/SideBar";
-import { Link } from "react-router-dom";
-import Login from "../Login/Login";
+import { Disclosure } from "@headlessui/react";
+
+import Login from "../Auth/Auth";
 
 const navigation = [
   // { name: 'Dashboard', href: '#', current: false },
@@ -54,7 +42,7 @@ export default function Navbar() {
                             className={classNames(
                               item.current
                                 ? " text-black"
-                                : "text-gray-400 hover:text-gray-700 hover:text-white",
+                                : "text-gray-400   hover:text-white",
                               "px-3 py-2  text-md font-medium"
                             )}
                             aria-current={item.current ? "page" : undefined}

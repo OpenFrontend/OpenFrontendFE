@@ -4,9 +4,17 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import styles from "../Modal/Modal.module.css";
 
 import api from "../../api";
+import { useSelector } from "react-redux";
+import Button from "../FormComponents/Button/Button";
+import Input from "../FormComponents/Input/Input";
+import Label from "../FormComponents/Label/Label";
+import LabelInputDiv from "../FormComponents/LabelInputDiv/LabelInputDiv";
 
-console.log(api.endPoint);
-const Login = () => {
+// console.log(api.endPoint);
+const Auth = () => {
+  const user = useSelector((state) => state.user.value);
+  console.log(user);
+
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
@@ -14,15 +22,11 @@ const Login = () => {
     setIsLoginOpen(!isLoginOpen);
     setIsRegisterOpen(!isRegisterOpen);
   };
+
+  const handleChange = () => {};
   return (
     <div>
-      <button
-        data-keyboard="false"
-        data-backdrop="static"
-        onClick={() => setIsLoginOpen(!isLoginOpen)}
-      >
-        Login
-      </button>
+      <Button onClick={() => setIsLoginOpen(!isLoginOpen)}>Login</Button>
       {isLoginOpen && (
         <div className="sticky  rounded-sm w-full z-50 bg-white top-0">
           <div
@@ -31,7 +35,7 @@ const Login = () => {
           />
           <div className={styles.centered}>
             <div className={`${styles.modal}`}>
-              <button
+              <Button
                 className={styles.closeBtn}
                 onClick={() => setIsLoginOpen(false)}
               >
@@ -40,7 +44,7 @@ const Login = () => {
                   className="h-8 w-8 mx-1 cursor-pointer"
                   aria-hidden="true"
                 />
-              </button>
+              </Button>
               <div
                 className={`${styles.modalContent} items-center h-full flex flex-row-reverse justify-start`}
               >
@@ -53,36 +57,35 @@ const Login = () => {
                       Login your account
                     </h2>
 
-                    <div className="flex flex-col mb-2 items-start">
-                      <label className="font-thin text-md my-1 ">Email</label>
-                      <input
-                        className="bg-gray-100 outline-none font-thin px-3 py-2 w-full"
+                    <LabelInputDiv>
+                      <Label>Email</Label>
+                      <Input
+                        className=""
                         placeholder="Email Address"
                         type="email"
+                        name=""
+                        value=""
+                        onChange={handleChange}
                       />
-                    </div>
-                    <div className="flex flex-col mb-2 items-start">
-                      <label className="font-thin text-md my-1 ">
-                        Password
-                      </label>
-                      <input
-                        className="bg-gray-100 outline-none font-thin px-3 py-2 w-full"
-                        type="password"
-                        placeholder="password"
-                      />
-                    </div>
-                    <button
+                    </LabelInputDiv>
+
+                    <LabelInputDiv>
+                      <Label>Password</Label>
+                      <Input type="password" placeholder="password" />
+                    </LabelInputDiv>
+
+                    <Button
                       type="button"
-                      className=" rounded-md bg-pink-600 px-3 py-2 text-gray-100 font-bold hover:text-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 w-full my-2"
+                      className="bg-pink-600 text-gray-100 w-full"
                     >
-                      Register
-                    </button>
+                      Login
+                    </Button>
+
                     <a
                       onClick={toggleModal}
-                      // to="/register"
                       className="font-thin underline text-black text-md"
                     >
-                      Already have an account? Login
+                      Don't have an account? Register
                     </a>
                   </form>
                 </div>
@@ -99,16 +102,15 @@ const Login = () => {
           />
           <div className={styles.centered}>
             <div className={`${styles.modal}`}>
-              <button
+              <Button
                 className={styles.closeBtn}
                 onClick={() => setIsRegisterOpen(false)}
               >
                 <XMarkIcon
-                  // onClick={toggleSideBar}
                   className="h-8 w-8 mx-1 cursor-pointer"
                   aria-hidden="true"
                 />
-              </button>
+              </Button>
               <div
                 className={`${styles.modalContent} items-center h-full flex justify-start`}
               >
@@ -120,43 +122,30 @@ const Login = () => {
                     <h2 className="text-2xl font-bold py-5">
                       Create your account
                     </h2>
-                    <div className="flex flex-col mb-2 items-start">
-                      <label className="font-thin text-md my-1">
-                        Full Name
-                      </label>
-                      <input
-                        placeholder="Full Name"
-                        className="bg-gray-100 outline-none font-thin text-md px-3 py-2 w-full"
-                        type="text"
-                      />
-                    </div>
-                    <div className="flex flex-col mb-2 items-start">
-                      <label className="font-thin text-md my-1 ">Email</label>
-                      <input
-                        className="bg-gray-100 outline-none font-thin px-3 py-2 w-full"
-                        placeholder="Email Address"
-                        type="email"
-                      />
-                    </div>
-                    <div className="flex flex-col mb-2 items-start">
-                      <label className="font-thin text-md my-1 ">
-                        Password
-                      </label>
-                      <input
-                        className="bg-gray-100 outline-none font-thin px-3 py-2 w-full"
-                        type="password"
-                        placeholder="password"
-                      />
-                    </div>
-                    <button
+
+                    <LabelInputDiv>
+                      <Label>Full Name</Label>
+                      <Input placeholder="Full Name" type="text" />
+                    </LabelInputDiv>
+
+                    <LabelInputDiv>
+                      <Label>Email</Label>
+                      <Input placeholder="Email Address" type="email" />
+                    </LabelInputDiv>
+
+                    <LabelInputDiv>
+                      <Label>Password</Label>
+                      <Input type="password" placeholder="password" />
+                    </LabelInputDiv>
+
+                    <Button
                       type="button"
-                      className=" rounded-md bg-pink-600 px-3 py-2 text-gray-100 font-bold hover:text-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 w-full my-2"
+                      className=" bg-pink-600 text-gray-100 w-full"
                     >
                       Register
-                    </button>
+                    </Button>
                     <a
                       onClick={toggleModal}
-                      // to="/register"
                       className="font-thin underline text-black text-md"
                     >
                       Already have an account? Login
@@ -172,4 +161,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Auth;

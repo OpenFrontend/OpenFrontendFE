@@ -1,25 +1,25 @@
 import React from "react";
 import Search from "../Search/Search";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import Button from "../FormComponents/Button/Button";
 
 const HomeNavbar = (props) => {
   return (
     <>
       <div className="flex z-10 px-5 py-3 items-center justify-between">
-        <div className="w-1/4">
-          <button onClick={props.toggleSideBar}>
-            Components{" "}
+        <div className="lg:w-1/4">
+          <Button onClick={props.toggleSideBar}>
+            <p className="lg:inline hidden">Components</p>
             <ChevronRightIcon
-              //   onClick={toggleSideBar}
               className="h-5 w-5 inline-block cursor-pointer"
               aria-hidden="true"
             />
-          </button>
+          </Button>
         </div>
-        <div className="w-2/4">
+        <div className="lg:w-2/4 w-3/4">
           <Search />
         </div>
-        <div className="w-1/4"></div>
+        <div className="lg:w-1/4 hidden"></div>
       </div>
     </>
   );

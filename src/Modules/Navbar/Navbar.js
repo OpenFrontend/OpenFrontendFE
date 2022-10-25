@@ -1,6 +1,8 @@
 import { Disclosure } from "@headlessui/react";
+import Auth from "../Auth/Auth";
 
 import Login from "../Auth/Auth";
+import Button from "../FormComponents/Button/Button";
 
 const navigation = [
   // { name: 'Dashboard', href: '#', current: false },
@@ -161,18 +163,10 @@ export default function Navbar() {
                       </Menu.Items>
                     </Transition>
                   </Menu> */}
-                  <button
-                    type="button"
-                    className="mx-2 rounded-md bg-gray-600 px-3 py-2 text-gray-100 font-bold hover:text-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 "
-                  >
-                    <Login />
-                  </button>
-                  <button
-                    type="button"
-                    className="mx-2 rounded-md bg-gray-600 px-3 py-2 text-gray-100 font-bold hover:text-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 "
-                  >
+                  <Auth />
+                  <Button className="text-white bg-red-600">
                     Share your work
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

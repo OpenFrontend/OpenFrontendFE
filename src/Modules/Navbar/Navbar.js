@@ -3,8 +3,6 @@ import { Disclosure } from "@headlessui/react";
 import Login from "../Auth/Auth";
 
 const navigation = [
-  // { name: 'Dashboard', href: '#', current: false },
-  // { name: 'Team', href: '#', current: true },
   // { name: 'Projects', href: '#', current: false },
   // { name: 'Calendar', href: '#', current: false },
 ];

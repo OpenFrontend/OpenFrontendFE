@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import styles from "../Modal/Modal.module.css";
 
-import api from "../../api";
+import api from "../../config";
 import { useSelector } from "react-redux";
 import Button from "../FormComponents/Button/Button";
 import Input from "../FormComponents/Input/Input";

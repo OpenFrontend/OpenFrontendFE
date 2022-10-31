@@ -3,17 +3,27 @@ import React, { useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import styles from "../Modal/Modal.module.css";
 
-import api from "../../config";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "../FormComponents/Button/Button";
 import Input from "../FormComponents/Input/Input";
 import Label from "../FormComponents/Label/Label";
 import LabelInputDiv from "../FormComponents/LabelInputDiv/LabelInputDiv";
+import { loginItem, signupItem } from "../../reducers/user";
 
-// console.log(api.endPoint);
 const Auth = () => {
-  const user = useSelector((state) => state.user.value);
-  console.log(user);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.user);
+
+  const [registerData, setRegisterData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+  });
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -23,10 +33,65 @@ const Auth = () => {
     setIsRegisterOpen(!isRegisterOpen);
   };
 
-  const handleChange = () => {};
+  const registerUser = async (e) => {
+    e.preventDefault();
+    if (registerData.email == "" || registerData.password == "") {
+      alert("All fields are required");
+      return;
+    }
+    setLoading(true);
+    console.log(registerData);
+    const data = {
+      email: registerData.email,
+      password: registerData.password,
+    };
+    try {
+      let res = await dispatch(signupItem(data));
+      console.log(res);
+      setLoading(false);
+      setIsRegisterOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+    if (loginData.email == "" || loginData.password == "") {
+      alert("All fields are required");
+      return;
+    }
+    setLoading(true);
+    console.log(loginData);
+    const data = {
+      email: loginData.email,
+      password: loginData.password,
+    };
+    try {
+      let res = await dispatch(loginItem(data));
+      console.log(res);
+      setLoading(false);
+      setIsRegisterOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
+
+  const handleRegisterChange = (e) => {
+    const { name, value } = e.target;
+    setRegisterData({ ...registerData, [name]: value });
+  };
+  const handleLoginChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData({ ...loginData, [name]: value });
+  };
+
   return (
     <div>
       <Button onClick={() => setIsLoginOpen(!isLoginOpen)}>Login</Button>
+
       {isLoginOpen && (
         <div className="sticky  rounded-sm w-full z-50 bg-white top-0">
           <div
@@ -46,7 +111,7 @@ const Auth = () => {
                 />
               </Button>
               <div
-                className={`${styles.modalContent} items-center h-full flex flex-row-reverse justify-start`}
+                className={`${styles.modalContent} items-center h-full flex  justify-start`}
               >
                 <div className="hidden lg:inline-flex w-2/4 p-0 h-full bg-pink-600 border rounded-2xl">
                   <h1 className="m-auto text-5xl text-white">Open Frontend</h1>
@@ -63,22 +128,29 @@ const Auth = () => {
                         className=""
                         placeholder="Email Address"
                         type="email"
-                        name=""
-                        value=""
-                        onChange={handleChange}
+                        name="email"
+                        value={loginData.email}
+                        onChange={handleLoginChange}
                       />
                     </LabelInputDiv>
 
                     <LabelInputDiv>
                       <Label>Password</Label>
-                      <Input type="password" placeholder="password" />
+                      <Input
+                        type="password"
+                        name="password"
+                        value={loginData.password}
+                        onChange={handleLoginChange}
+                        placeholder="password"
+                      />
                     </LabelInputDiv>
 
                     <Button
+                      onClick={loginUser}
                       type="button"
                       className="bg-pink-600 text-gray-100 w-full"
                     >
-                      Login
+                      {loading ? "loding..." : "Login"}
                     </Button>
 
                     <a
@@ -125,24 +197,43 @@ const Auth = () => {
 
                     <LabelInputDiv>
                       <Label>Full Name</Label>
-                      <Input placeholder="Full Name" type="text" />
+                      <Input
+                        placeholder="Full Name"
+                        onChange={handleRegisterChange}
+                        name="fullName"
+                        value={registerData.fullName}
+                        type="text"
+                      />
                     </LabelInputDiv>
 
                     <LabelInputDiv>
                       <Label>Email</Label>
-                      <Input placeholder="Email Address" type="email" />
+                      <Input
+                        placeholder="Email Address"
+                        onChange={handleRegisterChange}
+                        name="email"
+                        value={registerData.email}
+                        type="email"
+                      />
                     </LabelInputDiv>
 
                     <LabelInputDiv>
                       <Label>Password</Label>
-                      <Input type="password" placeholder="password" />
+                      <Input
+                        type="password"
+                        onChange={handleRegisterChange}
+                        name="password"
+                        value={registerData.password}
+                        placeholder="password"
+                      />
                     </LabelInputDiv>
 
                     <Button
                       type="button"
+                      onClick={registerUser}
                       className=" bg-pink-600 text-gray-100 w-full"
                     >
-                      Register
+                      {loading ? "loading" : "Register"}
                     </Button>
                     <a
                       onClick={toggleModal}

@@ -1,8 +1,8 @@
 import { Disclosure } from "@headlessui/react";
 import Auth from "../Auth/Auth";
 
-import Login from "../Auth/Auth";
 import Button from "../FormComponents/Button/Button";
+import { useDispatch, useSelector } from "react-redux";
 
 const navigation = [
   // { name: 'Projects', href: '#', current: false },
@@ -14,6 +14,9 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
   return (
     <div className="bg-white">
       <Disclosure as="nav">
@@ -161,10 +164,12 @@ export default function Navbar() {
                       </Menu.Items>
                     </Transition>
                   </Menu> */}
-                  <Auth />
-                  <Button className="text-white bg-red-600">
-                    Share your work
-                  </Button>
+                  {!user.loggedIn && <Auth />}
+                  {user.loggedIn && (
+                    <Button className="text-white bg-red-600">
+                      Share your work
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>

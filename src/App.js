@@ -4,7 +4,7 @@ import PrimaryRoutes from "./routes/PrimaryRoutes";
 
 function App() {
   return (
-    <div className="bg-gray-100 h-screen">
+    <div   className="bg-gray-100 h-screen">
       <BrowserRouter>
         <Navbar></Navbar>
         <PrimaryRoutes />

@@ -15,6 +15,7 @@ export const loginItem = createAsyncThunk(
 export const signupItem = createAsyncThunk(
   "user/signupItem",
   async (payload, thunkAPI) => {
+    console.log("in signupitem" + JSON.stringify(payload));
     let response = await signupAPI(payload);
     console.log("res=", response);
     if (response.isSuccessful === true) {
@@ -25,32 +26,39 @@ export const signupItem = createAsyncThunk(
 
 export const userSlice = createSlice({
   name: "user",
-  initialState: { userInfo: [], loggedIn: false },
+  initialState: {
+    userInfo: localStorage.getItem("userInfo"),
+    loggedIn: localStorage.getItem("loggedIn"),
+    token: localStorage.getItem("token"),
+  },
   reducers: {
     logoutFunction: (state, action) => {
-      state.userInfo = "";
+      state.token = "";
       let updateConnector = false;
       state.loggedIn = updateConnector;
-      // localStorage.removeItem("userdata");
+      localStorage.removeItem("token");
+      localStorage.removeItem("loggedIn");
     },
   },
   extraReducers: {
     [loginItem.fulfilled]: (state, action) => {
       if (action.payload.token) {
-        state.userInfo = action.payload;
+        state.token = action.payload;
         let updateConnector = true;
         state.loggedIn = updateConnector;
         localStorage.setItem("loggedIn", state.loggedIn);
+        localStorage.setItem("token", state.token);
       } else {
         state.loggedIn = false;
       }
     },
     [signupItem.fulfilled]: (state, action) => {
-      if (action.payload.token) {
-        state.userInfo = action.payload;
+      if (action.payload) {
+        state.token = action.payload;
         let updateConnector = true;
         state.loggedIn = updateConnector;
         localStorage.setItem("loggedIn", state.loggedIn);
+        localStorage.setItem("token", state.token);
       } else {
         state.loggedIn = false;
       }
